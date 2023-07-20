@@ -205,7 +205,7 @@
   }
 
   .copyright {
-    padding-top: 40px;
+    padding: 10px 0;
     text-align: center;
     color: #999;
     font-size: 15px;
