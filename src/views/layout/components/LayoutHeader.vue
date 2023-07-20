@@ -1,4 +1,13 @@
 <script setup>
+import getCategoryAPI from '@/apis/layoutAPI'
+import { onMounted } from 'vue'
+const getCategory = async () => {
+  const res = await getCategoryAPI()
+}
+
+onMounted(() => {
+  getCategory()
+})
 
 </script>
 
