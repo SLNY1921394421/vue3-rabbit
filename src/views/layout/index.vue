@@ -14,6 +14,9 @@ onMounted( ()=>categoryStore.getCategory())
   <LayoutNav />
   <LayoutHeader />
   <LayoutFixed />
+  <!-- 路有缓存：当路由的path一样参数不同时，会直接复用路由对应的组件 -->
+  <!-- 1.给RouterView添加key破坏缓存 -->
+  <!-- <RouterView :key="$route.fullPath" /> -->
   <RouterView />
   <LayoutFooter />
 </template>
