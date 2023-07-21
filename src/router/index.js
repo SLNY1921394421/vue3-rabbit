@@ -14,17 +14,17 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: Home,
+          name: 'Home',
           component: Home,
         }, {
-          path: '/category',
-          name: Category,
-          component: Category,
+          path: 'category/:id',
+          name: 'category',
+          component: Category
         }
       ]
     }, {
       path: '/Login',
-      name: Login,
+      name: 'Login',
       component: Login,
     }
     /* {
