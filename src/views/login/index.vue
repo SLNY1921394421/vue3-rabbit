@@ -2,8 +2,10 @@
 import { ref } from "vue"
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
-import { loginAPI } from '@/apis/user'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
 
 // 1. 准备表单对象
 const form = ref({
@@ -43,7 +45,8 @@ const reformRef = ref(null)
 const { account, password } = form.value
 const doLogin = () => {
   reformRef.value.validate(async (valid) => {
-    await loginAPI({ account, password })
+    // await loginAPI({ account, password })
+    await userStore.getUserInfo({ account, password })
     // 1. 提示用户
     ElMessage({ type: 'success', message: '登录成功' })
     // 2. 跳转首页
