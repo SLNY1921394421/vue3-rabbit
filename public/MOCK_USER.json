@@ -1,0 +1,17 @@
+{
+  "code":"1",
+  "msg":"操作成功",
+  "result": {
+    "id": "18610848230",
+    "account": "账号account",
+    "birthday": "1997-08-08",
+    "cityCode": "204",
+    "gender": "gender",
+    "mobile": "18610848230",
+    "nickname": "nickName",
+    "profession": "专业前端",
+    "procinceCode": "204",
+    "token": "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",
+    "avator": "avator"
+  }
+}

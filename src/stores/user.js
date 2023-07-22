@@ -6,13 +6,13 @@ export const useUserStore = defineStore('user', () => {
   const userInfo = ref({})
   const getUserInfo = async ({ account, password }) => {
     const res = await loginAPI({ account, password })
-    userInfo.value = res.result
+    // @TODO
+    userInfo.value = res.data.result
   }
   return {
     userInfo,
     getUserInfo,
   }
 }, {
-  persist: true
-  
+  persist: true,
 })

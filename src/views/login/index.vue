@@ -26,7 +26,6 @@ const rules = {
   agree: [
     {
       validator: (rule, value, callback) => {
-        console.log(value)
         // 自定义校验逻辑
         // 勾选就通过 不勾选就不通过
         if (value) {
