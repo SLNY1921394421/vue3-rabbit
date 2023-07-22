@@ -9,7 +9,13 @@ export const useUserStore = defineStore('user', () => {
     // @TODO
     userInfo.value = res.data.result
   }
+
+  // 退出时清除用户信息
+  const clearUserInfo = () => {
+    userInfo.value = {}
+  }
   return {
+    clearUserInfo,
     userInfo,
     getUserInfo,
   }
