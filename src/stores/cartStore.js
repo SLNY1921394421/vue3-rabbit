@@ -1,6 +1,6 @@
 import { computed, ref } from "vue";
 import { defineStore} from 'pinia'
-import { useUserStore } from './user'
+import { useUserStore } from './userStore'
 import { insertCartAPI, findNewCartListAPI, delCartAPI } from '@/apis/cart'
 
 // useCartStore
