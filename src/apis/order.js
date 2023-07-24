@@ -1,7 +1,9 @@
 import request from '@/utils/http'
 
-export const getOrderAPI = (id) => {
+export const getUserOrder = (params) => {
   return request({
-    url: `/member/order/${id}`
+    url: '/member/order',
+    method: 'GET',
+    params
   })
 }

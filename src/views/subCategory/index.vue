@@ -36,7 +36,7 @@ const disable = ref(false)
 const load = async () => {
   reqData.page++;
   const res = await getSubCategoryAPI(reqData)
-  goodList = [...goodList, ...res.result.items]
+  goodList.value = [...goodList, ...res.result.items]
   if(res.result.items.length === 0) {
     disable.value = true
   }
