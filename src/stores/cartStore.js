@@ -1,7 +1,7 @@
 import { computed, ref } from "vue";
 import { defineStore} from 'pinia'
 import { useUserStore } from './user'
-import { insertCartAPI, findNewCartListAPI, } from '@/apis/cart'
+import { insertCartAPI, findNewCartListAPI, delCartAPI } from '@/apis/cart'
 
 // useCartStore
 // 购物车
@@ -18,8 +18,7 @@ export const useCartStore = defineStore('cart', () => {
   // 添加购物车操作
   const addCart = async (goods) => {
     const { skuId, count } = goods
-    debugger
-    if(isLogin) {
+    if(isLogin.value) {
       await insertCartAPI({ skuId, count })
       updateNewList()
     } else {
@@ -34,9 +33,15 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
   // 删除购物车
-  const delCart = (skuId) => {
-    const idx = cartList.value.findIndex((item) => skuId === item.skuId)
-    cartList.value.splice(idx, 1)
+  const delCart = async (skuId) => {
+    if(isLogin.value) {
+      // 调用接口实现接口购物车中的删除功能
+      await delCartAPI([skuId])
+      updateNewList()
+    } else {
+      const idx = cartList.value.findIndex((item) => skuId === item.skuId)
+      cartList.value.splice(idx, 1)
+    }
   }
   // 单选
   const singleSelected = (skuId, selected) => {
@@ -48,6 +53,10 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value.forEach((item) => {
       item.selected = selected
     })
+  }
+  // 清空购物车
+  const clearCart = () => {
+    cartList.value = []
   }
 
 
@@ -73,6 +82,8 @@ export const useCartStore = defineStore('cart', () => {
     allCheck,
     selectedCount,
     selectedPrice,
+    clearCart,
+    updateNewList,
   }
 }, {
   persist: true
