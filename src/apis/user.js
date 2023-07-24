@@ -2,7 +2,7 @@
 import request from '@/utils/http'
 import axios from 'axios'
 
-/* export const loginAPI = ({ account, password }) => {
+export const loginAPI = ({ account, password }) => {
   return request({
     url: '/login',
     method: 'POST',
@@ -11,11 +11,11 @@ import axios from 'axios'
       password
     }
   })
-} */
+}
 
-export const loginAPI = (() => {
-  return axios.get('/MOCK_USER.json')
-})
+// export const loginAPI = (() => {
+//   return axios.get('/MOCK_USER.json')
+// })
 
 
 export const getLikeListAPI = ({ limit = 4 }) => {

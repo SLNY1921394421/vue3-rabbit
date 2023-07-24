@@ -6,8 +6,7 @@ export const useUserStore = defineStore('user', () => {
   const userInfo = ref({})
   const getUserInfo = async ({ account, password }) => {
     const res = await loginAPI({ account, password })
-    // @TODO
-    userInfo.value = res.data.result
+    userInfo.value = res.result
   }
 
   // 退出时清除用户信息

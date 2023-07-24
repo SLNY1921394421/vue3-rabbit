@@ -1,16 +1,22 @@
 <script setup>
-import { ref } from "vue"
+
+
+// 表单校验（账号名+密码）
+
+import { ref } from 'vue'
+
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router'
+
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 
 // 1. 准备表单对象
 const form = ref({
-  account: '18610848230',
-  password: '123456',
+  account: 'heima282',
+  password: 'hm#qd@23!',
   agree: true
 })
 
@@ -26,6 +32,7 @@ const rules = {
   agree: [
     {
       validator: (rule, value, callback) => {
+        console.log(value)
         // 自定义校验逻辑
         // 勾选就通过 不勾选就不通过
         if (value) {
@@ -39,20 +46,29 @@ const rules = {
 }
 
 // 3. 获取form实例做统一校验
+const formRef = ref(null)
 const router = useRouter()
-const reformRef = ref(null)
-const { account, password } = form.value
 const doLogin = () => {
-  reformRef.value.validate(async (valid) => {
-    // await loginAPI({ account, password })
-    await userStore.getUserInfo({ account, password })
-    // 1. 提示用户
-    ElMessage({ type: 'success', message: '登录成功' })
-    // 2. 跳转首页
-    router.replace('./')
+  const { account, password } = form.value
+  // 调用实例方法
+  formRef.value.validate(async (valid) => {
+    // valid: 所有表单都通过校验  才为true
+    console.log(valid)
+    // 以valid做为判断条件 如果通过校验才执行登录逻辑
+    if (valid) {
+      // TODO LOGIN
+      await userStore.getUserInfo({ account, password })
+      // 1. 提示用户
+      ElMessage({ type: 'success', message: '登录成功' })
+      // 2. 跳转首页
+      router.replace({ path: '/' })
+    }
   })
 }
 
+// 1. 用户名和密码 只需要通过简单的配置（看文档的方式 - 复杂功能通过多个不同组件拆解）
+// 2. 同意协议  自定义规则  validator:(rule,value,callback)=>{}
+// 3. 统一校验  通过调用form实例的方法 validate -> true
 </script>
 
 
@@ -77,8 +93,7 @@ const doLogin = () => {
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form ref="reformRef" :model="form" :rules="rules" label-position="right" label-width="60px"
-              status-icon>
+            <el-form ref="formRef" :model="form" :rules="rules" label-position="right" label-width="60px" status-icon>
               <el-form-item prop="account" label="账户">
                 <el-input v-model="form.account" />
               </el-form-item>
